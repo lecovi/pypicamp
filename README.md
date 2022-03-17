@@ -52,15 +52,33 @@ Build your images:
 docker compose build
 ```
 
-Config your `pip` with in your `$HOME/.pip/pip.conf`:
+## Clients configuration
+
+### pip
+
+Config your `pip` editing your `$HOME/.pip/pip.conf`. Create file if doesn't exists.
 
 ```
 [global]
 index-url=http://SERVER_IP_ADDRESS:3141/root/pypi/+simple/
-extra-index-url=http://SERVER_IP_ADDRESS:8080/simple
 [install]
 trusted-host=SERVER_IP_ADDRESS
 ```
+
+### docker
+
+Config your `docker` editing your `/etc/docker/daemon.conf`. Create file if doesn't exists.
+
+
+```json
+{
+  "registry-mirrors": [
+    "http://192.168.242:5000"
+  ]
+}
+```
+
+Restart your `docker` daemon (something like: `sudo systemctl restart docker`).
 
 ## Usage
 
@@ -70,7 +88,17 @@ Run your containers with:
 docker compose up
 ```
 
-Update `bandersnatch` mirror with:
+Download top packages from PyPI using `pypicamp`:
+
+```bash
+poetry run python pypicamp pypi write-package-file --max-items N
+```
+
+This will write a `top-pypi-packages.txt` file with the top N packages. 
+You should copy the content of this file to your clipboard and paste it on the 
+`[allowlist]` section of the `bandersnatch/bandersnatch.conf` file.
+
+Then, update `bandersnatch` mirror with:
 
 ```bash
 docker compose exec bandersnatch bandersnatch mirror
