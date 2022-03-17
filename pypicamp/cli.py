@@ -1,6 +1,7 @@
 import typer
 
 from .network.cli import app as network_app
+from .pypi.cli import app as pypi_app
 
 
 __version__ = "0.1.0"
@@ -8,6 +9,7 @@ __version__ = "0.1.0"
 
 app = typer.Typer(help="Awesome PyPICamp CLI manager.")
 app.add_typer(network_app, name="network")
+app.add_typer(pypi_app, name="pypi")
 
 @app.command()
 def info():

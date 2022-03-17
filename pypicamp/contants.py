@@ -27,3 +27,6 @@ INVALID_INTERFACE_PREFIX = (
     "virbr",   # Virtual bridge interface
     "veth",    # Virtual ethernet interface
 )
+
+TOP_PYPI_PACKAGES_DOWNLOADS_URL = "https://hugovk.github.io/top-pypi-packages/top-pypi-packages-30-days.json"
+TOP_PYPI_PACKAGES_DOWNLOADS_FILE_PATH = "top-pypi-packages.txt"
