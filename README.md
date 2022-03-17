@@ -52,12 +52,12 @@ Build your images:
 docker compose build
 ```
 
-Config your `pip` with:
+Config your `pip` with in your `$HOME/.pip/pip.conf`:
 
 ```
 [global]
-index-url=http://SERVER_IP_ADDRESS:8080/simple
-extra-index-url=http://SERVER_IP_ADDRESS:3141/root/pypi/+simple/
+index-url=http://SERVER_IP_ADDRESS:3141/root/pypi/+simple/
+extra-index-url=http://SERVER_IP_ADDRESS:8080/simple
 [install]
 trusted-host=SERVER_IP_ADDRESS
 ```
