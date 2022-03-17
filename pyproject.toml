@@ -13,6 +13,7 @@ requests = "^2.27.1"
 speedtest-cli = "^2.1.3"
 sendgrid = "^6.9.7"
 python-dotenv = "^0.19.2"
+typer = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 

@@ -11,7 +11,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import speedtest
 
-from .contants import (
+from pypicamp.contants import (
     INVALID_INTERFACE_PREFIX,
     IP_ADDRESS_LIST,
     HTTPS_URLS,
@@ -34,6 +34,7 @@ def send_connection_status_email(connection_status):
 
     sg = SendGridAPIClient(os.environ['SENDGRID_API_KEY'])
     response = sg.send(message)
+    #FIXME: if DEBUG = True => console.log()
     console.log(connection_status, response.status_code, response.body, response.headers)
 
 
@@ -47,6 +48,7 @@ def chek_internet_connection_speed(servers=[], threads=None):
     s.results.share()
 
     results_dict = s.results.dict()
+    #FIXME: if DEBUG = True => console.log()
     console.log(f"Speedtest: {results_dict}")
 
     return results_dict
@@ -55,12 +57,15 @@ def chek_internet_connection_speed(servers=[], threads=None):
 def check_internet_connection():
     """ Checks if the current computer is connected to the internet."""
     if can_access_with_url():
+        #FIXME: if DEBUG = True => console.log()
         console.log(f":world_map: [bold green]The computer is connected to the internet.[/] :thumbs_up:")
         return True
     elif can_access_with_ip():
+        #FIXME: if DEBUG = True => console.log()
         console.log(f"The computer is connected to the internet but [red]with DNS problems.[/]")
         return True
     else:
+        #FIXME: if DEBUG = True => console.log()
         console.log(f"The computer is not connected to the internet.")
         return False
 
@@ -89,17 +94,20 @@ def can_access_with_ip(ips=IP_ADDRESS_LIST):
     return True
 
 
-def check_network():
+def network_status():
     """ Checks if the current computer is connected to a network."""
     hostname = socket.gethostname()
     interfaces = get_network_interfaces()
     ip_addresses = []
     for iface in interfaces:
         addr = netifaces.ifaddresses(iface)
+        #FIXME: if DEBUG = True => console.log()
         console.log(f"Interface LINK: {addr[netifaces.AF_LINK]}")
         console.log(f"Interface IPv4: {addr[netifaces.AF_INET]}")
         ip_addresses.append(addr[netifaces.AF_INET][0]["addr"])
+        #FIXME: if DEBUG = True => console.log()
         console.log(f"Interface IPv6: {addr[netifaces.AF_INET6]}")
+    #FIXME: if DEBUG = True => console.log()
     console.log(f"Your Computer Name is: [bold]{hostname}[/] @ {ip_addresses}")
 
     network = {
@@ -112,8 +120,10 @@ def check_network():
 def get_network_interfaces():
     """ Gets the network interfaces of the current computer."""
     interfaces = netifaces.interfaces()
+    #FIXME: if DEBUG = True => console.log()
     console.log(f"Interfaces: {interfaces}")
     valid_interfaces = __removes_invalid_interfaces(interfaces)
+    #FIXME: if DEBUG = True => console.log()
     console.log(f"Available interfaces: {valid_interfaces}")
     return valid_interfaces
 
@@ -122,8 +132,10 @@ def __removes_invalid_interfaces(interfaces):
     """ Removes invalid interfaces from the list of interfaces."""
     valid_interfaces = []
     for iface in interfaces:
+        #FIXME: if DEBUG = True => console.log()
         console.log(f"Checking interface: {iface}")
         if iface.startswith(INVALID_INTERFACE_PREFIX):
+            #FIXME: if DEBUG = True => console.log()
             console.log(f"Invalid interface: {iface}")
         else:
             valid_interfaces.append(iface)

@@ -25,4 +25,5 @@ INVALID_INTERFACE_PREFIX = (
     "docker",  # Docker interface
     "br-",     # Bridge interface
     "virbr",   # Virtual bridge interface
+    "veth",    # Virtual ethernet interface
 )
