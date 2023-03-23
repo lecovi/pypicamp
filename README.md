@@ -61,6 +61,7 @@ Config your `pip` editing your `$HOME/.pip/pip.conf`. Create file if doesn't exi
 ```
 [global]
 index-url=http://SERVER_IP_ADDRESS:3141/root/pypi/+simple/
+timeout=300
 [install]
 trusted-host=SERVER_IP_ADDRESS
 ```
